@@ -1,0 +1,24 @@
+plugins {
+    id 'kotlin'
+    id 'org.jetbrains.kotlin.jvm' //设置jvm插件
+}
+
+compileKotlin {
+    //需要设置，否者可能无法生成文件
+    kotlinOptions {
+        jvmTarget = "1.8"
+
+        freeCompilerArgs += "-Xuse-experimental=com.squareup.kotlinpoet.ksp.KotlinPoetKspPreview"
+        freeCompilerArgs += "-Xuse-experimental=com.google.devtools.ksp.KspExperimental"
+    }
+}
+
+dependencies {
+    //ksp依赖
+    implementation("com.google.devtools.ksp:symbol-processing-api:$ksp_version")
+    //poet依赖
+    implementation("com.squareup:kotlinpoet:1.10.2")
+    implementation("com.squareup:kotlinpoet-ksp:1.10.0")
+
+    implementation project(":anno")
+}
