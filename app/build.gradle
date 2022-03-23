@@ -19,37 +19,27 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    sourceSets {
+        main {
+            java {
+                srcDirs += ['build/generated/ksp/debug/kotlin','build/generated/ksp/release/kotlin']
+            }
+//              gradle.7.0配置
+//            kotlin {
+//                srcDirs = ['build/generated/ksp/debug/kotlin','build/generated/ksp/release/kotlin']
+//            }
+        }
+    }
+
 
     buildTypes {
         release {
-            sourceSets {
-                main {
-                    java {
-                        srcDirs += ['build/generated/ksp/release/kotlin']
-                    }
-//              gradle.7.0配置
-//                    kotlin{
-//                        srcDirs = ['build/generated/ksp/release/kotlin']
-//                    }
-                }
-            }
 
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
         debug {
-            sourceSets {
-                main {
-                    java {
-                        srcDirs += ['build/generated/ksp/debug/kotlin']
-                    }
-//              gradle.7.0配置
-//                    kotlin{
-//                        srcDirs = ['build/generated/ksp/debug/kotlin']
-//                    }
-                }
-            }
 
         }
     }
@@ -59,6 +49,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    dataBinding{
+        enabled=true
     }
 
 }
